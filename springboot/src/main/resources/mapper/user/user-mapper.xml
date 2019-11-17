@@ -3,7 +3,36 @@
 <mapper namespace="test.user.IUserDao">
 
     <select id="getUserBeanList" resultType="test.entity.UserBean">
-        select * from user
+        select id, username, realname from user
+    </select>
+
+    <insert id="addUser" parameterType="test.entity.UserBean" >
+        insert into user(id, username, password, realname)
+        values (#{id}, #{userName}, #{passWord}, #{realName})
+    </insert>
+
+    <delete id="deleteUserByUserName" parameterType="String">
+        delete from user where username = #{id}
+    </delete>
+
+    <select id="checkUserValid" parameterType="test.entity.UserBean" resultType="int">
+        select count(1) from user
+        where username = #{userName} and password = #{passWord}
+    </select>
+
+    <select id="checkUserExists" parameterType="test.entity.UserBean" resultType="int">
+        select count(1) from user
+        where username = #{userName}
+    </select>
+
+    <select id="getUserByUserName" parameterType="String" resultType="test.entity.UserBean">
+        select id, username, realname from user
+        where username = #{userName}
+    </select>
+
+    <select id="getUserByRealName" parameterType="string" resultType="test.entity.UserBean">
+        select id, username, realname from user
+        where realname = #{realName}
     </select>
 
 </mapper>
