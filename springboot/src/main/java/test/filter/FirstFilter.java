@@ -46,7 +46,6 @@ public class FirstFilter implements Filter {
         }
         response.addCookie(new Cookie(LOGIN_KEY, userInfoBean.toString()));
         filterChain.doFilter(servletRequest, servletResponse);
-        response.getOutputStream().write(String.format("ip-->%s, count-->%d\r\n", userInfoBean.getIp(), userInfoBean.getCount()).getBytes());
         logger.info("{} end", FirstFilter.class);
     }
 
